@@ -28,3 +28,7 @@ if (DEFINED EMSCRIPTEN)
 else()
     add_library(module ${CORE_SRC} ${CORE_HDR})
 endif()
+
+add_custom_command(TARGET typings POST_BUILD
+    COMMAND node scripts/post-build.js
+)

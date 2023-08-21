@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "intelliSenseMode": "windows-clang-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Users/Quixel/Desktop/emscript/emsdk/upstream/emscripten/system/include/",
+                "C:/Program Files/LLVM/lib/clang/16/include/"
+            ],
+            "compilerPath": "C:/Program Files/LLVM/bin/clang++.exe",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
