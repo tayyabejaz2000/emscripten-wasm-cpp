@@ -30,5 +30,5 @@ else()
 endif()
 
 add_custom_command(TARGET typings POST_BUILD
-    COMMAND node scripts/post-build.js
+    COMMAND node scripts/post-build.cjs bin/module.d.ts
 )
