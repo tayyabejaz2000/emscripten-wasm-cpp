@@ -7,5 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Compress
-        run: |
-          tar -czvf module.tar.gz ./package
+        uses: a7ul/tar-action@v1.1.3
+        id: compress
+        with:
+          command: c
+          cwd: ./package
+          files: |
+            ./index.ts
+            ./module.d.ts
+            ./module.js
+            ./module.wasm
+            ./package.json
+          outPath: module.tar.gz
