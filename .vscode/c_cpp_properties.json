@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "intelliSenseMode": "windows-clang-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/sdk/emsdk/upstream/emscripten/system/include/",
+            ],
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
