@@ -1,7 +1,7 @@
 {
   "name": "wasm-module",
-  "version": "0.0.0",
-  "type": "module",
+  "version": "0.0.1",
+  "description": "WASM Module for WEBGL",
   "devDependencies": {
     "@types/emscripten": "^1.39.7",
     "file-loader": "^6.2.0",

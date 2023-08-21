@@ -26,13 +26,16 @@
 *.wasm
 
 # Binaries
-/bin
+**/bin
 
 # CMake
-/CMakeFiles
+**/CMakeFiles
 cmake_install.cmake
 CMakeCache.txt
 Makefile
 
 # Node
-node_modules
+**/node_modules
+
+# VS Code
+**/.vscode
