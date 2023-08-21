@@ -23,7 +23,6 @@
 *.exe
 *.out
 *.app
-*.wasm
 
 # Binaries
 **/bin
