@@ -12,5 +12,5 @@ jobs:
         with:
           command: c
           files: |
-            ./package
+            ../package
           outPath: module.tar.gz
