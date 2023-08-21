@@ -11,6 +11,11 @@ jobs:
         id: compress
         with:
           command: c
+          cwd: ./package
           files: |
-            ../package
+            index.ts
+            module.d.ts
+            module.js
+            module.wasm
+            package.json
           outPath: module.tar.gz
