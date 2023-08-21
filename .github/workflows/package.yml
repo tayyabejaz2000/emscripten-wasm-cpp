@@ -13,9 +13,5 @@ jobs:
           command: c
           cwd: ./package
           files: |
-            index.ts
-            module.d.ts
-            module.js
-            module.wasm
-            package.json
+            ./index.ts
           outPath: module.tar.gz
