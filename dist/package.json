@@ -1,5 +1,5 @@
 {
-  "name": "wasm-module",
+  "name": "module-wasm",
   "version": "0.0.1",
   "description": "WASM Module for WEBGL",
   "devDependencies": {

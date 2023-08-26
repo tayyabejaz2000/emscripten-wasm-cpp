@@ -1,5 +1,7 @@
 /// <reference types="emscripten" />
 
+declare module "module-wasm";
+
 export type Vector = {
   x: number,
   y: number,
