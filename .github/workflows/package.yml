@@ -35,7 +35,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: module ${{ github.ref }}
+          tag_name: ${{ github.ref }}
           release_name: Release WASM Module ${{ github.ref }}
           draft: false
           prerelease: false
