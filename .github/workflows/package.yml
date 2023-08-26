@@ -15,8 +15,8 @@ jobs:
           command: c
           cwd: ./dist
           files: |
-            ./index.ts
-            ./module.d.ts
+            ./index.d.ts
+            ./index.js
             ./module.js
             ./module.wasm
             ./package.json
