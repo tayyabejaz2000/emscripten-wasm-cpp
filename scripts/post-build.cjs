@@ -7,7 +7,7 @@ const buildDir = process.argv[2];
 const moduleName = process.argv[3];
 
 const distDir = "dist";
-fs.rmSync(distDir, { recursive: true, force: true })
+if (fs.existsSync(distDir)) fs.rmSync(distDir, { recursive: true, force: true })
 fs.mkdirSync(distDir);
 
 const wasmFile = `${buildDir}/${moduleName}.wasm`;
