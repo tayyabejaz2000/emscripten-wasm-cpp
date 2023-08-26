@@ -7,7 +7,7 @@ const buildDir = process.argv[2];
 const moduleName = process.argv[3];
 
 const distDir = "dist";
-
+fs.rmSync(distDir, { recursive: true, force: true })
 fs.mkdirSync(distDir);
 
 const wasmFile = `${buildDir}/${moduleName}.wasm`;
@@ -17,7 +17,7 @@ const typingsFile = `${buildDir}/index.d.ts`;
 let data = fs.readFileSync(typingsFile).toString();
 
 if (!data.includes("EmscriptenModule")) {
-  data = `/// <reference types="emscripten" />\n\ndeclare module "module-wasm";\n\n` + data.replace("MainModule", "MainModule extends EmscriptenModule");
+  data = `/// <reference types="emscripten" />\n\ndeclare module "module-wasm";\n\n` + data.replace("MainModule", "MainModule extends EmscriptenModule") + "\nexport function LoadWASM(): Promise<MainModule>;";
   fs.writeFileSync(typingsFile, data);
 }
 

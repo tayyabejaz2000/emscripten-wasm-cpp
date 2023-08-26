@@ -11,3 +11,5 @@ export type Vector = {
 export interface MainModule extends EmscriptenModule {
   Add(_0: Vector, _1: Vector): Vector;
 }
+
+export function LoadWASM(): Promise<MainModule>;
