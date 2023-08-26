@@ -5,9 +5,11 @@
             "intelliSenseMode": "windows-clang-x64",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/sdk/emsdk/upstream/emscripten/system/include/",
+                "${workspaceFolder}/sdk/emsdk/upstream/emscripten/system/include",
+                "${workspaceFolder}/sdk/emsdk/upstream/lib/clang/18/include"
             ],
-            "cppStandard": "c++17"
+            "compilerPath": "${workspaceFolder}/sdk/emsdk/upstream/bin/clang++.exe",
+            "cppStandard": "c++20"
         }
     ],
     "version": 4
