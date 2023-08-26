@@ -21,14 +21,12 @@ if (DEFINED EMSCRIPTEN)
     set_target_properties(module PROPERTIES COMPILE_FLAGS "-O3 -msimd128")
     set_target_properties(module PROPERTIES LINK_FLAGS    "-O3 --bind -sWASM -sENVIRONMENT=web -sNO_EXIT_RUNTIME -sMODULARIZE -sEXPORTED_RUNTIME_METHODS=['addOnPostRun']")
     
-    add_executable(typings ${TARGET_SOURCES})
-    
-    set_target_properties(typings PROPERTIES COMPILE_FLAGS "-O3 -msimd128")
-    set_target_properties(typings PROPERTIES LINK_FLAGS    "-O3 --bind --embind-emit-tsd bin/module.d.ts -sEXPORTED_FUNCTIONS=['_free']")
+    set_target_properties(module PROPERTIES COMPILE_FLAGS "-O3 -msimd128")
+    set_target_properties(module PROPERTIES LINK_FLAGS    "-O3 --bind --embind-emit-tsd bin/index.d.ts -sEXPORTED_FUNCTIONS=['_free']")
 else()
     add_library(module ${CORE_SRC} ${CORE_HDR})
 endif()
 
-add_custom_command(TARGET typings POST_BUILD
+add_custom_command(TARGET module POST_BUILD
     COMMAND node scripts/post-build.cjs ${BUILD_DIR} module
 )
