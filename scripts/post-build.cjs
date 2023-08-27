@@ -25,14 +25,7 @@ fs.copyFileSync(wasmFile, `${distDir}/${moduleName}.wasm`)
 fs.copyFileSync(bindingFile, `${distDir}/${moduleName}.js`)
 fs.copyFileSync(typingsFile, `${distDir}/index.d.ts`)
 
-const loader = `import Module from 'module-wasm/module';
-import '!!file-loader?name=wasm/module.wasm!./module.wasm';
-export async function LoadWASM() {
-  const wasmFile = await fetch('wasm/module.wasm');
-  return Module({
-    wasmBinary: new Uint8Array(await wasmFile.arrayBuffer()),
-  });
-}`
+const loader = `import a from"module-wasm/module";import"!!file-loader?name=wasm/module.wasm!./module.wasm";export async function LoadWASM(){const m=await fetch("wasm/module.wasm");return a({wasmBinary:new Uint8Array(await m.arrayBuffer())})}`
 
 const packageJson = `{
   "name": "module-wasm",

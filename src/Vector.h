@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "vectorization.h"
 
 struct AngleAxis
@@ -47,6 +48,7 @@ struct EulerRotation
 
 class Vector
 {
+public:
   union
   {
     float4 vec;
@@ -75,35 +77,36 @@ public:
   void Set(float x, float y, float z) { this->x = x, this->y = y, this->z = z; }
 
 public:
-  Vector& Add(const Vector& v);
-  Vector& Sub(const Vector& v);
-  Vector& Mul(const Vector& v);
-  Vector& Div(const Vector& v);
-  Vector& AddVal(float val);
-  Vector& SubVal(float val);
-  Vector& MulVal(float val);
-  Vector& DivVal(float val);
+  Vector* Add(Vector* v);
+  Vector* Sub(Vector* v);
+  Vector* Mul(Vector* v);
+  Vector* Div(Vector* v);
+  Vector* Add(float val);
+  Vector* Sub(float val);
+  Vector* Mul(float val);
+  Vector* Div(float val);
 
-  Vector& Abs();
-  Vector& Normalize();
+  Vector* Abs();
+  Vector* Normalize();
 
-  Vector& RotateEuler(const EulerRotation& u);
-  Vector& Rotate(const AngleAxis& u);
-  Vector& RotateX(float angle);
-  Vector& RotateY(float angle);
-  Vector& RotateZ(float angle);
-
-public:
-  Vector Normalized() const;
+  //TODO Rotate Vector By (Optional)
+  Vector* RotateEuler(const EulerRotation& u);
+  Vector* Rotate(const AngleAxis& u);
+  Vector* RotateX(float angle);
+  Vector* RotateY(float angle);
+  Vector* RotateZ(float angle);
 
 public:
+  Vector* Normalized() const;
   float Magnitude() const;
-  float Dist(const Vector& v) const;
+  float Dist(Vector* v) const;
 
 public:
-  Vector Copy();
+  Vector* Copy();
+  Point ToObject();
+  std::string ToString();
 
 public:
-  static Vector Make(float x = 0.0f, float y = 0.0f, float z = 0.0f);
-  static Vector Midpoint(const Vector a, const Vector b);
+  static Vector* Make(float x = 0.0f, float y = 0.0f, float z = 0.0f);
+  static Vector* Midpoint(Vector* a, Vector* b);
 };
