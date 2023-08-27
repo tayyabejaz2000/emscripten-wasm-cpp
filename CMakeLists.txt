@@ -15,7 +15,7 @@ file(GLOB_RECURSE SOURCES src/*.cpp src/*.h)
 add_executable(module ${SOURCES})
 
 set_target_properties(module PROPERTIES COMPILE_FLAGS "-O3 -msimd128 -fno-exceptions")
-set_target_properties(module PROPERTIES LINK_FLAGS    "-O3 --bind --closure 1 -sWASM -sENVIRONMENT=web -sNO_EXIT_RUNTIME -sMODULARIZE -sEXPORTED_RUNTIME_METHODS=['addOnPostRun']")
+set_target_properties(module PROPERTIES LINK_FLAGS    "-O3 --bind --closure 1 -sWASM -sENVIRONMENT=web -sNO_EXIT_RUNTIME -sMODULARIZE")
 
 add_executable(typings ${SOURCES})
 

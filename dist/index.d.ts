@@ -25,10 +25,18 @@ export interface Vector {
   RotateZ(_0: number): Vector;
   Magnitude(): number;
   Dist(_0: Vector): number;
+  ToObject(): Point;
   Rotate(_0: AngleAxis): Vector;
   RotateEuler(_0: EulerRotation): Vector;
+  ToString(): ArrayBuffer|Uint8Array|Uint8ClampedArray|Int8Array|string;
   delete(): void;
 }
+
+export type Point = {
+  x: number,
+  y: number,
+  z: number
+};
 
 export type AngleAxis = {
   x: number,
