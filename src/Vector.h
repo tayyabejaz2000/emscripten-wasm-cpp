@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "vectorization.h"
 
 struct AngleAxis
@@ -47,6 +48,7 @@ struct EulerRotation
 
 class Vector
 {
+public:
   union
   {
     float4 vec;
@@ -59,7 +61,10 @@ class Vector
     };
   };
 
-private:
+protected:
+  std::weak_ptr<Vector> SharedRef;
+
+public:
   Vector(float x, float y, float z) : x(x), y(y), z(z), w(0.0f) {};
   Vector(float4 vec) : vec(vec) {};
 
@@ -75,35 +80,33 @@ public:
   void Set(float x, float y, float z) { this->x = x, this->y = y, this->z = z; }
 
 public:
-  Vector& Add(const Vector& v);
-  Vector& Sub(const Vector& v);
-  Vector& Mul(const Vector& v);
-  Vector& Div(const Vector& v);
-  Vector& AddVal(float val);
-  Vector& SubVal(float val);
-  Vector& MulVal(float val);
-  Vector& DivVal(float val);
+  std::shared_ptr<Vector> Add(const std::shared_ptr<Vector>& v);
+  std::shared_ptr<Vector> Sub(const std::shared_ptr<Vector>& v);
+  std::shared_ptr<Vector> Mul(const std::shared_ptr<Vector>& v);
+  std::shared_ptr<Vector> Div(const std::shared_ptr<Vector>& v);
+  std::shared_ptr<Vector> AddVal(float val);
+  std::shared_ptr<Vector> SubVal(float val);
+  std::shared_ptr<Vector> MulVal(float val);
+  std::shared_ptr<Vector> DivVal(float val);
 
-  Vector& Abs();
-  Vector& Normalize();
+  std::shared_ptr<Vector> Abs();
+  std::shared_ptr<Vector> Normalize();
 
-  Vector& RotateEuler(const EulerRotation& u);
-  Vector& Rotate(const AngleAxis& u);
-  Vector& RotateX(float angle);
-  Vector& RotateY(float angle);
-  Vector& RotateZ(float angle);
-
-public:
-  Vector Normalized() const;
+  std::shared_ptr<Vector> RotateEuler(const EulerRotation& u);
+  std::shared_ptr<Vector> Rotate(const AngleAxis& u);
+  std::shared_ptr<Vector> RotateX(float angle);
+  std::shared_ptr<Vector> RotateY(float angle);
+  std::shared_ptr<Vector> RotateZ(float angle);
 
 public:
+  std::shared_ptr<Vector> Normalized() const;
   float Magnitude() const;
-  float Dist(const Vector& v) const;
+  float Dist(const std::shared_ptr<Vector>& v) const;
 
 public:
-  Vector Copy();
+  std::shared_ptr<Vector> Copy();
 
 public:
-  static Vector Make(float x = 0.0f, float y = 0.0f, float z = 0.0f);
-  static Vector Midpoint(const Vector a, const Vector b);
+  static std::shared_ptr<Vector> Make(float x = 0.0f, float y = 0.0f, float z = 0.0f);
+  static std::shared_ptr<Vector> Midpoint(const std::shared_ptr<Vector>& a, const std::shared_ptr<Vector>& b);
 };

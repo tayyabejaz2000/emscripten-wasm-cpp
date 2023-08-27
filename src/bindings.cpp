@@ -9,6 +9,7 @@ EMSCRIPTEN_BINDINGS(Vector)
 {
   class_<Vector>("Vector")
     .constructor(&Vector::Make)
+    .smart_ptr<std::shared_ptr<Vector>>("Vector")
     .property("x", &Vector::GetX, &Vector::SetX)
     .property("y", &Vector::GetY, &Vector::SetY)
     .property("z", &Vector::GetZ, &Vector::SetZ)
