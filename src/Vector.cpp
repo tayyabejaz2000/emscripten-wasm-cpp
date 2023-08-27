@@ -9,6 +9,11 @@ Vector* Vector::Make(float x, float y, float z)
     return new Vector(x, y, z);
 }
 
+const Vector* const Vector::MakeConst(float x, float y, float z)
+{
+    return new Vector(x, y, z);
+}
+
 Vector* Vector::Add(Vector* v)
 {
     this->vec += v->vec;
@@ -69,25 +74,26 @@ Vector* Vector::Normalize()
     return this;
 }
 
-Vector* Vector::RotateEuler(const EulerRotation& u)
+Vector* Vector::RotateEuler(EulerRotation u)
 {
+    u.vec *= (float)DEG2RAD;
     const float sa = sin(u.x), sb = sin(u.y), sy = sin(u.z);
     const float ca = cos(u.x), cb = cos(u.y), cy = cos(u.z);
-    this->x = cumsum(this->vec * float4{ (cb * cy), (sa * sb * cy - ca * sy), (ca * sb * cy + sa * sy), (0.0f) });
-    this->y = cumsum(this->vec * float4{ (cb * sy), (sa * sb * sy + ca * cy), (ca * sb * sy - sa * cy), (0.0f) });
-    this->z = cumsum(this->vec * float4{ (-sb), (sa * cb), (ca * cb), (0.0f) });
+    this->x = hadd(this->vec * float4{ (cb * cy), (sa * sb * cy - ca * sy), (ca * sb * cy + sa * sy), (0.0f) });
+    this->y = hadd(this->vec * float4{ (cb * sy), (sa * sb * sy + ca * cy), (ca * sb * sy - sa * cy), (0.0f) });
+    this->z = hadd(this->vec * float4{ (-sb), (sa * cb), (ca * cb), (0.0f) });
     return this;
 }
-Vector* Vector::Rotate(const AngleAxis& u)
+Vector* Vector::Rotate(AngleAxis u)
 {
     const float s = sin(u.angle), c = cos(u.angle);
     const float c1 = 1 - c;
     const float p1 = u.x * u.y * c1, p2 = u.z * s;
     const float q1 = u.x * u.z * c1, q2 = u.y * s;
     const float r1 = u.y * u.z * c1, r2 = u.x * s;
-    this->x = cumsum(this->vec * float4{ (c + u.x * u.x * c1), (p1 - p2), (q1 + q2), (0.0f) });
-    this->y = cumsum(this->vec * float4{ (p1 + p2), (c + u.y * u.y * c1), (r1 - r2), (0.0f) });
-    this->z = cumsum(this->vec * float4{ (q1 - q2), (r1 + r2), (c + u.z * u.z * c1), (0.0f) });
+    this->x = hadd(this->vec * float4{ (c + u.x * u.x * c1), (p1 - p2), (q1 + q2), (0.0f) });
+    this->y = hadd(this->vec * float4{ (p1 + p2), (c + u.y * u.y * c1), (r1 - r2), (0.0f) });
+    this->z = hadd(this->vec * float4{ (q1 - q2), (r1 + r2), (c + u.z * u.z * c1), (0.0f) });
     return this;
 }
 
@@ -125,13 +131,13 @@ Vector* Vector::Normalized() const
 
 float Vector::Magnitude() const
 {
-    return sqrt(cumsum(this->vec * this->vec));
+    return sqrt(hadd(this->vec * this->vec));
 }
 
 float Vector::Dist(Vector* v) const
 {
     const auto sub = this->vec - v->vec;
-    return sqrt(cumsum(sub * sub));
+    return sqrt(hadd(sub * sub));
 }
 
 Vector* Vector::Copy()

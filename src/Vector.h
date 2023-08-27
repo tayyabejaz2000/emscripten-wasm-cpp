@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "vectorization.h"
+#include "math.h"
 
 struct AngleAxis
 {
@@ -90,8 +90,8 @@ public:
   Vector* Normalize();
 
   //TODO Rotate Vector By (Optional)
-  Vector* RotateEuler(const EulerRotation& u);
-  Vector* Rotate(const AngleAxis& u);
+  Vector* RotateEuler(EulerRotation u);
+  Vector* Rotate(AngleAxis u);
   Vector* RotateX(float angle);
   Vector* RotateY(float angle);
   Vector* RotateZ(float angle);
@@ -108,5 +108,6 @@ public:
 
 public:
   static Vector* Make(float x = 0.0f, float y = 0.0f, float z = 0.0f);
+  static const Vector* const MakeConst(float x = 0.0f, float y = 0.0f, float z = 0.0f);
   static Vector* Midpoint(Vector* a, Vector* b);
 };
