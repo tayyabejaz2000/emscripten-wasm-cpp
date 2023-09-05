@@ -35,6 +35,32 @@ public:
     float GetLocalRadianRotation() const;
 
 public:
+    void RecalculatePosition();
+    void RecalculateLocalPosition();
+    void UpdateChildrenPosition();
+
+    void MoveTo(float x, float y, float z);
+    void MoveOffset(float deltaX, float deltaY, float deltaZ);
+
+    void RotateTo(float angle);
+    void RotateOffset(float deltaAngle);
+
+    void SetSize(float width, float height);
+    void SetSizeOffset(float deltaW, float deltaH);
+
+    void SetWidth(float width, bool lockAspectRatio = false);
+    void SetHeight(float height, bool lockAspectRatio = false);
+    void SetWidthOffset(float deltaW, bool lockAspectRatio = false);
+    void SetHeightOffset(float deltaH, bool lockAspectRatio = false);
+
+    Vector* TranslateLocal(Vector* InVec);
+    Vector* TranslateWorld(Vector* InVec);
+    Vector* RotateLocal(Vector* InVec);
+    Vector* RotateWorld(Vector* InVec);
+    Vector* TransformLocal(Vector* InVec);
+    Vector* TransformWorld(Vector* InVec);
+
+public:
     void SetParent(Transform* InParent);
     void AddChild(Transform* InChild);
     void RemoveChild(Transform* InChild);

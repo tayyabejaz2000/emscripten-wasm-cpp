@@ -9,11 +9,6 @@ Vector* Vector::Make(float x, float y, float z)
     return new Vector(x, y, z);
 }
 
-const Vector* const Vector::MakeConst(float x, float y, float z)
-{
-    return new Vector(x, y, z);
-}
-
 Vector* Vector::Add(Vector* v)
 {
     this->vec += v->vec;
@@ -61,6 +56,31 @@ Vector* Vector::Div(float val)
     this->vec /= val;
     return this;
 }
+
+Vector* Vector::Add(float x, float y, float z)
+{
+    this->vec += float4{ x, y, z, 0.0f };
+    return this;
+}
+
+Vector* Vector::Sub(float x, float y, float z)
+{
+    this->vec -= float4{ x, y, z, 0.0f };
+    return this;
+}
+
+Vector* Vector::Mul(float x, float y, float z)
+{
+    this->vec *= float4{ x, y, z, 0.0f };
+    return this;
+}
+
+Vector* Vector::Div(float x, float y, float z)
+{
+    this->vec /= float4{ x, y, z, 0.0f };
+    return this;
+}
+
 
 Vector* Vector::Abs()
 {
@@ -143,6 +163,12 @@ float Vector::Dist(Vector* v) const
 Vector* Vector::Copy()
 {
     return new Vector(this->vec);
+}
+
+Vector* Vector::CopyFrom(Vector* from)
+{
+    this->vec = from->vec;
+    return this;
 }
 
 Point Vector::ToObject()

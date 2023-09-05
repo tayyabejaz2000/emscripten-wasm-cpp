@@ -85,6 +85,10 @@ public:
   Vector* Sub(float val);
   Vector* Mul(float val);
   Vector* Div(float val);
+  Vector* Add(float x, float y, float z);
+  Vector* Sub(float x, float y, float z);
+  Vector* Mul(float x, float y, float z);
+  Vector* Div(float x, float y, float z);
 
   Vector* Abs();
   Vector* Normalize();
@@ -103,11 +107,11 @@ public:
 
 public:
   Vector* Copy();
+  Vector* CopyFrom(Vector* from);
   Point ToObject();
   std::string ToString();
 
 public:
   static Vector* Make(float x = 0.0f, float y = 0.0f, float z = 0.0f);
-  static const Vector* const MakeConst(float x = 0.0f, float y = 0.0f, float z = 0.0f);
   static Vector* Midpoint(Vector* a, Vector* b);
 };
