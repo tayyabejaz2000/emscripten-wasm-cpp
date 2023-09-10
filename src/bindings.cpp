@@ -1,17 +1,13 @@
-#include "Vector.h"
-
 #include <emscripten/emscripten.h>
 #include <emscripten/bind.h>
+
+#include "Vector.h"
+#include "Transform.h"
 
 using namespace emscripten;
 
 typedef Vector* (Vector::* VectorOpFn)(Vector*);
 typedef Vector* (Vector::* FloatOpFn)(float);
-
-Vector* Passthrough(Vector* val, int x)
-{
-  return val;
-}
 
 EMSCRIPTEN_BINDINGS(Vector)
 {
@@ -43,8 +39,42 @@ EMSCRIPTEN_BINDINGS(Vector)
     .function("Copy()", &Vector::Copy, allow_raw_pointers())
     .function("ToString()", &Vector::ToString)
     .function("ToObject()", &Vector::ToObject)
-    .function("Passthrough", &Passthrough, allow_raw_pointers())
     .class_function("Midpoint(a, b)", &Vector::Midpoint, allow_raw_pointers())
+    .class_function("None", &Vector::None, allow_raw_pointers())
+    ;
+}
+
+EMSCRIPTEN_BINDINGS(Transform)
+{
+  class_<Transform>("Transform")
+    .constructor(&Transform::Make, allow_raw_pointers())
+    .function("GetPosition()", &Transform::GetPosition, allow_raw_pointers())
+    .function("GetLocalPosition()", &Transform::GetLocalPosition, allow_raw_pointers())
+    .function("GetSize()", &Transform::GetSize, allow_raw_pointers())
+    .function("GetRotation()", &Transform::GetRotation)
+    .function("GetRadianRotation()", &Transform::GetRadianRotation)
+    .function("GetLocalRotation()", &Transform::GetLocalRotation)
+    .function("GetLocalRadianRotation()", &Transform::GetLocalRadianRotation)
+    .function("MoveTo(x, y, z)", &Transform::MoveTo)
+    .function("MoveOffset(deltaX, deltaY, deltaZ)", &Transform::MoveOffset)
+    .function("RotateTo(angle)", &Transform::RotateTo)
+    .function("RotateOffset(angle)", &Transform::RotateOffset)
+    .function("SetSize(width, height)", &Transform::SetSize)
+    .function("SetSizeOffset(deltaW, deltaH)", &Transform::SetSizeOffset)
+    .function("SetWidth(width, lockAspectRatio)", &Transform::SetWidth)
+    .function("SetHeight(height, lockAspectRatio)", &Transform::SetHeight)
+    .function("SetWidthOffset(deltaW, lockAspectRatio)", &Transform::SetWidthOffset)
+    .function("SetHeightOffset(deltaH, lockAspectRatio)", &Transform::SetHeightOffset)
+    .function("TranslateLocal(InVec)", &Transform::TranslateLocal, allow_raw_pointers())
+    .function("TranslateWorld(InVec)", &Transform::TranslateWorld, allow_raw_pointers())
+    .function("RotateLocal(InVec)", &Transform::RotateLocal, allow_raw_pointers())
+    .function("RotateWorld(InVec)", &Transform::RotateWorld, allow_raw_pointers())
+    .function("TransformLocal(InVec)", &Transform::TransformLocal, allow_raw_pointers())
+    .function("TransformWorld(InVec)", &Transform::TransformWorld, allow_raw_pointers())
+    .function("SetParent(InParent)", &Transform::SetParent, allow_raw_pointers())
+    .function("AddChild(InChild)", &Transform::AddChild, allow_raw_pointers())
+    .function("RemoveChild(InChild)", &Transform::RemoveChild, allow_raw_pointers())
+    .class_function("None", &Transform::None, allow_raw_pointers())
     ;
 }
 

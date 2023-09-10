@@ -12,7 +12,7 @@ static constexpr auto RAD2DEG = 180.0l / PI;
 
 FORCE_INLINE float hadd(float4 vec)
 {
-    const auto s = vec.xy + vec.zy;
+    const auto s = vec.xy + vec.zw;
     return s.x + s.y;
 }
 

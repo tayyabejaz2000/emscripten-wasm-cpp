@@ -9,9 +9,6 @@
 class Transform
 {
 public:
-    static const Transform* None;
-
-public:
     Vector* Position = Vector::Make(0.0f, 0.0f, 0.0f);
     Vector* LocalPosition = Vector::Make(0.0f, 0.0f, 0.0f);
     Vector* Size = Vector::Make(1.0f, 1.0f, 1.0f);
@@ -64,4 +61,8 @@ public:
     void SetParent(Transform* InParent);
     void AddChild(Transform* InChild);
     void RemoveChild(Transform* InChild);
+
+public:
+    static const Transform* None() { return nullptr; }
+    static Transform* Make(Transform* InParent = nullptr);
 };

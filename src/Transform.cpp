@@ -1,6 +1,9 @@
 #include "Transform.h"
 
-const Transform* Transform::None = nullptr;
+Transform* Transform::Make(Transform* InParent)
+{
+    return new Transform(InParent);
+}
 
 Transform::Transform(Transform* InParent) : Parent(InParent)
 {

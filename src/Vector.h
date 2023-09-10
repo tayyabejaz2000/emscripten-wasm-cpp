@@ -112,6 +112,7 @@ public:
   std::string ToString();
 
 public:
+  static const Vector* None() { return nullptr; }
   static Vector* Make(float x = 0.0f, float y = 0.0f, float z = 0.0f);
   static Vector* Midpoint(Vector* a, Vector* b);
 };
